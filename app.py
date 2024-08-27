@@ -74,79 +74,8 @@ def signup():
 
         save_user(username, password)
         return redirect(url_for('login'))
-    return render_template_string("""
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Sign Up</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            background-image: url('/static/log.jpg'); /* Ensure you have this image in your static directory */
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-        }
-        .signup-container {
-            max-width: 300px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.7); /* Added a semi-transparent background for better readability */
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #fff; /* For better visibility against the background */
-        }
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>UADILIFU PLAGIARISM DETECTOR</h1>
-    <div class="signup-container">
-        <h2>Student Sign Up</h2>
-        <form method="POST" action="{{ url_for('signup') }}"> <!-- Ensure the action points to the 'signup' route -->
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Sign Up</button>
-        </form>
-    </div>
-</body>
-</html>
+    return render_template('signup.html')
 
-    """)
 @app.route('/dashboard')
 def dashboard():
 
