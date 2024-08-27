@@ -467,7 +467,7 @@ def check_plagiarism():
         results_percentage = max_score * 100
 
         # Record the student username and plagiarism result in 'matokeo' text file
-        with open("matokeo.txt", "a") as matokeo_file:
+        with open(MATOKEO_FILE_PATH, "a") as matokeo_file:
             student_username = session.get('username', 'Unknown Student')
             matokeo_file.write(f"{student_username}: {results_percentage:.2f}%\n")
 
