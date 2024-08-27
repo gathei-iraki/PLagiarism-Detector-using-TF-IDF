@@ -1,9 +1,1 @@
-student: 19.37%
-nesta: 19.37%
-james: 55.60%
-nesta: 55.60%
-nesta: 55.60%
-nesta: 19.37%
-nesta: 19.37%
-nesta: 19.37%
-nesta: 19.37%
+kilukilu: 19.37%

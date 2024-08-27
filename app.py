@@ -8,7 +8,8 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this to a random secret key
 
 # Dummy data for the example. In a real application, you would use a database.
-SIGN_FILE = 'sign.txt'  # Path to your sign text file
+SIGN_FILE = os.path.join(os.path.dirname(__file__), 'docs', 'sign.txt')
+MATOKEO_FILE_PATH = os.path.join(os.path.dirname(__file__), 'docs', 'matokeo.txt')
 
 def save_user(username, password):
     with open(SIGN_FILE, "a") as file:
@@ -16,13 +17,21 @@ def save_user(username, password):
         file.write(f"{username}:{hashed_password}\n")
 
 def check_user(username, password):
-    with open("sign.txt", "r") as file:
-        for line in file:
-            parts = line.strip().split(":", 1)  # Split on the first occurrence of ':'
-            if len(parts) == 2:
-                file_username, file_password_hash = parts
-                if file_username == username and check_password_hash(file_password_hash, password):
-                    return True
+    # Construct the path to 'sign.txt' located in 'docs' inside the current directory
+    SIGN_FILE = os.path.join(os.path.dirname(__file__), 'docs', 'sign.txt')
+
+    try:
+        with open(SIGN_FILE, "r") as file:
+            for line in file:
+                parts = line.strip().split(":", 1)  # Split on the first occurrence of ':'
+                if len(parts) == 2:
+                    file_username, file_password_hash = parts
+                    if file_username == username and check_password_hash(file_password_hash, password):
+                        return True
+    except FileNotFoundError:
+        print(f"Error: The file '{SIGN_FILE}' does not exist.")
+        return False
+
     return False
 
 # Record of plagiarism checks for the admin to view. This would also typically be stored in a database.
@@ -34,7 +43,7 @@ def vectorize(Text):
 
 # Load the content of juma
 juma_filename = "juma"
-juma_file_path = os.path.join(os.getcwd(), f"{juma_filename}.txt")
+juma_file_path = os.path.join(os.path.dirname(__file__), 'docs', f"{juma_filename}.txt")
 
 if os.path.exists(juma_file_path):
     with open(juma_file_path, "r", encoding="utf-8") as juma_file:
@@ -204,8 +213,8 @@ def dashboard():
     if session['username'] == 'admin':
         plagiarism_records = []
         try:
-            with open("matokeo.txt", "r") as matokeo_file:
-                for line in matokeo_file:
+                with open(MATOKEO_FILE_PATH, "r") as matokeo_file:
+                 for line in matokeo_file:
                     parts = line.strip().split(':', 1)  # Split on the first colon only
                     if len(parts) == 2:
                         student_username, plagiarism_percentage = parts
