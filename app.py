@@ -164,14 +164,7 @@ def check_plagiarism():
             student_username = session.get('username', 'Unknown Student')
             matokeo_file.write(f"{student_username}: {results_percentage:.2f}%\n")
 
-        return f"""
-        <div style="text-align: center; padding: 20px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px;">
-            <h2 style="color: #721c24;">Plagiarism Detected!</h2>
-            <p style="font-size: 18px; color: #721c24;">
-                Plagiarism has been detected in your document. The percentage of plagiarism detected is: <strong>{results_percentage:.2f}%</strong>.
-            </p>
-        </div>
-        """
+        return render_template('results.html', results_percentage=results_percentage)
     else:
         return "No plagiarism detected."
 
