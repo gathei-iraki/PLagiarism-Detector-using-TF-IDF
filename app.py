@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template_string, redirect, url_for, session
+from flask import Flask, request, render_template_string, render_template, redirect, url_for, session
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -55,70 +55,13 @@ else:
 juma_text_vector = vectorize([juma_text])
 
 
-# Define the welcome route as the default route
+# Define the welcome route as the default route(index.html)
 @app.route('/')
 def welcome():
-    return render_template_string("""
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to UADILIFU Plagiarism Detector</title>
-    <style>
-        body   {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            background-image: url('/static/log.jpg');
-            background-size: cover;
-            background-position: center;
-            color: #fff;  /* Adjusted text color for better visibility against a potentially dark background */
-        }
-           .content {
-            background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% transparency */
-            display: inline-block;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        h1 {
-            color: #E2D70E;
-        }
-        button {
-            background-color: #E2D70E;
-            color: #161614;
-                                  font-size:20px;
-            border: none;
-            padding: 10px 20px;
-            margin: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .button-container {
-            margin-top: 30px;
-        }
-    </style>
-</head>
-<body>
-        <div class="content">                           
-    <h1>UADILIFU PLAGIARISM DETECTOR</h1>
-     <h2>Welcome to the UADILIFU Plagiarism Detector<br>
-                                   Designed to help students and educators ensure that their written work is free of plagiarism.<br>
-                                  Lets get started
-                                  </h2>
-    <div class="button-container">
-        <button onclick="location.href='/login'">Log In</button>
-        <button onclick="location.href='/signup'">Student Sign Up</button>
-       </div>                            
-    </div>
-</body>
-</html>
+    return render_template('index.html')
 
-    """)
+
+    
 # Student Sign Up route
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
