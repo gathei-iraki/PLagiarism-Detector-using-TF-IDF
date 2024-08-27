@@ -100,105 +100,8 @@ def dashboard():
 
     else:
         # Student view for uploading files
-        return render_template_string("""
-        <<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Files for Plagiarism Check</title>
-    <!-- Add Bootstrap CSS link -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-       body   {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            background-image: url('/static/log.jpg');
-            background-size: cover;
-            background-position: center;
-            color: #fff;  /* Adjusted text color for better visibility against a potentially dark background */
-        }
-           .content {
-            background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% transparency */
-            display: inline-block;
-            padding: 20px;
-            border-radius: 10px;
-        }
-        h1 {
-            text-align: center;
-            background-color: #6c757d; /* Dull green color */
-            color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        form {
-            margin-top: 20px;
-        }
-
-        input[type="file"] {
-            display: none;
-        }
-
-        .custom-file-upload {
-            border: 1px solid #ccc;
-            display: inline-block;
-            padding: 6px 12px;
-            cursor: pointer;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 5px;
-        }
-
-        input[type="submit"] {
-            background-color: #28a745;
-            color: #fff;
-            padding: 10px 45px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: auto;
-         margin-top: 60px;
-
-        margin-right: auto;
-        display: block;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #218838;
-        }
-    </style>
-</head>
-<body>
-                                          <div class="content">
-
-    <div class="container">
-        <h1 class="mt-4">UADILIFU PLAGIARISM CHECKER</h1>
+        return render_template('upload.html')
        
-
-        <h2 class="mt-4">Upload Text Files</h2>
-        <form action="/check_plagiarism" method="post" enctype="multipart/form-data">
-            <label for="file-upload" class="custom-file-upload">
-                <i class="fa fa-cloud-upload"></i> Choose File
-            </label>
-            <input id="file-upload" type="file" name="files" multiple>
-            <p id="file-count">No files selected</p>
-            <input type="submit" value="Check Plagiarism">
-        </form>
-    </div>
-    </div>
-
-    <!-- Add JavaScript to display the file count -->
-    <script>
-        document.getElementById('file-upload').addEventListener('change', function () {
-            const fileCount = this.files.length;
-            document.getElementById('file-count').innerText = fileCount > 0 ? `${fileCount} file(s) selected` : 'No files selected';
-        });
-    </script>
-</body>
-</html>
-        """)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -212,49 +115,8 @@ def login():
         else:
             return 'Invalid credentials', 401
 
-    return render_template_string("""
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            background-image: url('/static/log.jpg');
-            background-size: cover;
-            background-position: center;
-                                   color: #fff; }
-                                  
-        .login-container { max-width: 300px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; }
-        input[type="text"], input[type="password"] { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-        button { width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        button:hover { background-color: #0056b3; }
-    </style>
-</head>
-<body>
-                                  <h1>UADILIFU PLAGIARISM DETECTOR</h1>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form method="POST" action="{{ url_for('login') }}">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">Login</button>
-        </form>
-    </div>
-</body>
-</html>
-    """)
+    return render_template('login.html')
+    
 
 @app.route('/logout')
 def logout():
