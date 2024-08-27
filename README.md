@@ -1,3 +1,6 @@
+This repo consists of a source code  which detects plagiarism in a textual document using **cosine similarity**.<br>
+
+
 <b>FILES DESCRIPTION</b> <br>
 
 1.<b>app.py:</b> The main application file that contains the core logic and routing for the project. This file initializes the application, handles user input, and manages the overall flow of the program. <br>
