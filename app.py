@@ -94,49 +94,8 @@ def dashboard():
         except FileNotFoundError:
             plagiarism_records = [("No records found", "")]
         # Render the admin view with plagiarism records
-        return render_template_string('''
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <style>
-       body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            background-image: url('/static/log.jpg'); /* Ensure you have this image in your static directory */
-            background-size: cover;
-            background-position: center;
-            color: #fff;
-        }
-        .container { width: 80%; margin: auto; }
-        h2 { text-align: center; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        th { color:#161614; background-color: #f2f2f2; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Plagiarism Records</h2>
-        <table>
-            <tr>
-                <th>Student Username</th>
-                <th>Plagiarism Percentage</th>
-            </tr>
-            {% for record in plagiarism_records %}
-            <tr>
-                <td>{{ record[0] }}</td>
-                <td>{{ record[1] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-</body>
-</html>
-        ''', plagiarism_records=plagiarism_records)
+        return render_template('admindash.html', plagiarism_records=plagiarism_records)
+
 
 
     else:
